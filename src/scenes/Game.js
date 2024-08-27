@@ -4,6 +4,7 @@ import { Scene } from "phaser";
 import { Paddle } from "../entities/Paddle";
 import { Ball } from "../entities/Ball";
 import { Brick } from "../entities/Brick";
+import { WallBrick } from "../entities/WallBrick";
 
 export class Game extends Scene {
   constructor() {
@@ -16,14 +17,17 @@ export class Game extends Scene {
     // el this, aca, hace referencia a la escena
     this.ball = new Ball(this, 400, 300, 10, 0xffffff, 1);
     this.paddle = new Paddle(this, 400, 550, 300, 20, 0xffffff, 1);
-    this.brick = new Brick(this, 400, 200, 200, 200, 0xffffff, 1);
+    this.wall = new WallBrick(this);
 
     // colisiones
     this.physics.add.collider(this.paddle, this.ball);
+
     this.physics.add.collider(
       this.ball,
-      this.brick,
-      this.brick.hit,
+      this.wall,
+      (ball, brick) => {
+        brick.hit();
+      },
       null,
       this
     );

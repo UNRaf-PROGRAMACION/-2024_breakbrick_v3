@@ -6,9 +6,18 @@ export class Brick extends Phaser.GameObjects.Rectangle {
     scene.physics.add.existing(this);
     this.body.immovable = true;
     this.body.setCollideWorldBounds(true);
+
+    this.toches = 0;
   }
 
-  hit(ball, brick) {
-    brick.destroy();
+  hit() {
+    this.toches++;
+    if (this.toches === 1) {
+      this.setFillStyle(0xff0000);
+    }
+
+    if (this.toches === 2) {
+      this.destroy();
+    }
   }
 }
