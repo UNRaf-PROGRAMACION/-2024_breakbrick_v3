@@ -11,6 +11,15 @@ export class Game extends Scene {
     super("Game");
   }
 
+  init() {
+    // Reset points
+    this.points = 0;
+    this.game_over_timeout = 20;
+
+    // launch the HUD scene
+    this.scene.launch("Hud", { remaining_time: this.game_over_timeout });
+  }
+
   create() {
     // instanciar una nueva paleta.
     // crea un nuevo objeto

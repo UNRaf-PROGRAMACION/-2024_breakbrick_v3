@@ -18,22 +18,20 @@ export class Hud extends Scene {
   }
 
   create() {
-    this.points_text = this.add.bitmapText(
+    this.points_text = this.add.text(10, 10, "POINTS:0000", {
+      fontSize: "24px",
+      color: "#ffffff",
+    });
+
+    this.remaining_time_text = this.add.text(
+      this.scale.width - 200,
       10,
-      10,
-      "pixelfont",
-      "POINTS:0000",
-      24
+      `REMAINING:${this.remaining_time.toString().padStart(2, "0")}s`,
+      {
+        fontSize: "24px",
+        color: "#ffffff",
+      }
     );
-    this.remaining_time_text = this.add
-      .bitmapText(
-        this.scale.width - 10,
-        10,
-        "pixelfont",
-        `REMAINING:${this.remaining_time}s`,
-        24
-      )
-      .setOrigin(1, 0);
   }
 
   update_points(points) {
