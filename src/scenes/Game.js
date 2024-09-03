@@ -16,8 +16,8 @@ export class Game extends Scene {
     // crea un nuevo objeto
     // el this, aca, hace referencia a la escena
     this.ball = new Ball(this, 400, 300, 10, 0xffffff, 1);
-    this.paddle = new Paddle(this, 400, 550, 300, 20, 0xffffff, 1);
-    this.wall = new WallBrick(this);
+    this.paddle = new Paddle(this, 400, 550, 300, 20, 0xffffff, 1, "ARROWS"); // ARROWS, WASD, IJKL, CURSOR
+    this.wall = new WallBrick(this, 6, 16);
 
     // colisiones
     this.physics.add.collider(this.paddle, this.ball);
