@@ -13,14 +13,30 @@ export class Game extends Scene {
 
   points;
   game_over_timeout;
+  timer_event;
 
   init() {
     // Reset points
     this.points = 0;
-    this.game_over_timeout = 20;
+    this.game_over_timeout = 99;
 
     // launch the HUD scene
     this.scene.launch("Hud", { remaining_time: this.game_over_timeout });
+
+    // create a timmer event
+    this.timmer_event = this.time.addEvent({
+      delay: 1000,
+      callback: () => {
+        this.game_over_timeout--;
+        this.scene.get("Hud").update_timeout(this.game_over_timeout);
+
+        if (this.game_over_timeout === 0) {
+          this.scene.stop("Hud");
+          this.scene.start("GameOver");
+        }
+      },
+      loop: true,
+    });
   }
 
   create() {
