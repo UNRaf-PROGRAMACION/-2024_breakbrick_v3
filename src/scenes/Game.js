@@ -26,6 +26,7 @@ export class Game extends Scene {
     // create a timmer event
     this.timmer_event = this.time.addEvent({
       delay: 1000,
+      loop: true,
       callback: () => {
         this.game_over_timeout--;
         this.scene.get("Hud").update_timeout(this.game_over_timeout);
@@ -35,7 +36,6 @@ export class Game extends Scene {
           this.scene.start("GameOver");
         }
       },
-      loop: true,
     });
   }
 
