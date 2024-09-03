@@ -11,6 +11,9 @@ export class Game extends Scene {
     super("Game");
   }
 
+  points;
+  game_over_timeout;
+
   init() {
     // Reset points
     this.points = 0;
@@ -46,6 +49,7 @@ export class Game extends Scene {
       console.log("worldbounds");
       if (down) {
         console.log("hit bottom");
+        this.scene.stop("Hud");
         this.scene.start("GameOver");
       }
     });
@@ -53,5 +57,10 @@ export class Game extends Scene {
 
   update() {
     this.paddle.update();
+  }
+
+  update_points(points) {
+    this.points += points;
+    this.scene.get("Hud").update_points(this.points);
   }
 }
