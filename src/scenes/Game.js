@@ -71,10 +71,6 @@ export class Game extends Scene {
     });
   }
 
-  update() {
-    this.paddle.update();
-  }
-
   update_points(points) {
     this.points += points;
     this.scene.get("Hud").update_points(this.points);

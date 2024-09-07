@@ -8,6 +8,8 @@
  * @property {Function|null} stop
  */
 
+import { inputConfigs } from "../utils/inputConfigs";
+
 export class InputManager {
     /**
      * @param {Object} params
@@ -17,13 +19,7 @@ export class InputManager {
      */
     constructor({scene, inputConfig = null, callbacks = null}) {
         this.scene = scene;
-        this.inputConfig = inputConfig || {
-            up: ['W', 'UP'],
-            down: ['S', 'DOWN'],
-            left: ['A', 'LEFT'],
-            right: ['D', 'RIGHT'],
-            action: ['SPACE', 'CLICK']
-        };
+        this.inputConfig = inputConfig || inputConfigs.defaultInputConfigs;
 
         this.callbacks = callbacks || {
             up: null,

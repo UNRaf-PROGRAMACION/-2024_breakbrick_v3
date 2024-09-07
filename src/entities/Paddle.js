@@ -1,5 +1,6 @@
 // @ts-nocheck
 import { InputManager } from "../components/InputManager.js";
+import { inputConfigs } from "../utils/inputConfigs.js";
 
 export class Paddle extends Phaser.GameObjects.Rectangle {
   constructor(scene, x, y, width, height, color, alpha, inputType) {
@@ -28,34 +29,15 @@ export class Paddle extends Phaser.GameObjects.Rectangle {
 
   getInputConfig(inputType) {
     if (inputType === "CURSOR" || inputType === "ARROWS") {
-      return {
-        left: ["LEFT", "ARROWLEFT"],
-        right: ["RIGHT", "ARROWRIGHT"],
-      };
+      return inputConfigs.cursor;
     }
 
     if (inputType === "WASD") {
-      return {
-        left: ["A"],
-        right: ["D"],
-      };
+      return inputConfigs.wasd;
     }
 
     if (inputType === "IJKL") {
-      return {
-        up: ["I"],
-        down: ["K"],
-        left: ["J"],
-        right: ["L"],
-        action: ["ENTER"],
-      };
-    }
-
-    if (inputType === "MOUSE") {
-      return {
-        left: ["LEFT"],
-        right: ["RIGHT"],
-      };
+      return inputConfigs.ijkl;
     }
 
     return null;
@@ -72,6 +54,4 @@ export class Paddle extends Phaser.GameObjects.Rectangle {
   stop() {
     this.body.setVelocityX(0);
   }
-
-  update() {}
 }

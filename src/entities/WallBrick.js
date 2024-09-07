@@ -28,7 +28,7 @@ export class WallBrick extends Phaser.GameObjects.Group {
     for (let i = 0; i < filas; i++) {
       for (let j = 0; j < columnas; j++) {
         const x = offsetX + (j * widthBrick) + (j * spacing) + (widthBrick / 2);
-        const y = minSpacing + (i * heightBrick) + (i * 10) + (heightBrick / 2);
+        const y = 50 + (i * heightBrick) + (i * 10) + (heightBrick / 2);
         let brick = new Brick(
           this.scene,
           x,
