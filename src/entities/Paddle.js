@@ -1,5 +1,9 @@
+// @ts-nocheck
+import { InputManager } from "../components/InputManager.js";
+import { inputConfigs } from "../utils/inputConfigs.js";
+
 export class Paddle extends Phaser.GameObjects.Rectangle {
-  constructor(scene, x, y, width, height, color, alpha) {
+  constructor(scene, x, y, width, height, color, alpha, inputType) {
     super(scene, x, y, width, height, color, alpha);
 
     // this en este contexto es la instancia de la clase Paleta
@@ -14,17 +18,40 @@ export class Paddle extends Phaser.GameObjects.Rectangle {
     //hacer que la paleta no se salga de los limites del mundo
     this.body.setCollideWorldBounds(true);
 
-    //agregar cursor
-    this.cursor = scene.input.keyboard.createCursorKeys();
+    const callbacks = {
+      left: this.handleLeft.bind(this),
+      right: this.handleRight.bind(this),
+      stop: this.stop.bind(this),
+    };
+
+    this.inputManager = new InputManager({ scene, callbacks, inputConfig: this.getInputConfig(inputType) });
   }
 
-  update() {
-    if (this.cursor.left.isDown) {
-      this.body.setVelocityX(-300);
-    } else if (this.cursor.right.isDown) {
-      this.body.setVelocityX(300);
-    } else {
-      this.body.setVelocityX(0);
+  getInputConfig(inputType) {
+    if (inputType === "CURSOR" || inputType === "ARROWS") {
+      return inputConfigs.cursor;
     }
+
+    if (inputType === "WASD") {
+      return inputConfigs.wasd;
+    }
+
+    if (inputType === "IJKL") {
+      return inputConfigs.ijkl;
+    }
+
+    return null;
+  }
+
+  handleLeft() {
+    this.body.setVelocityX(-300);
+  }
+
+  handleRight() {
+    this.body.setVelocityX(300);
+  }
+
+  stop() {
+    this.body.setVelocityX(0);
   }
 }
