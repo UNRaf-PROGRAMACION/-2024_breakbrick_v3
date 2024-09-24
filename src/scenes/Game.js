@@ -15,6 +15,9 @@ export class Game extends Scene {
   game_over_timeout;
   timer_event;
 
+  variable1 = 1;
+  variable2 = 2;
+
   init(data) {
     // Reset points
     this.points = data.points || 0;
@@ -75,4 +78,8 @@ export class Game extends Scene {
     this.points += points;
     this.scene.get("Hud").update_points(this.points);
   }
+
+  update_algo = () => {
+    console.log("update_algo");
+  };
 }
