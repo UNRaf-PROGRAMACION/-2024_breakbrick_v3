@@ -26,6 +26,8 @@ export class Game extends Scene {
     // launch the HUD scene
     this.scene.launch("Hud", { remaining_time: this.game_over_timeout });
 
+    console.log("Game scene init");
+
     // create a timmer event
     this.timmer_event = this.time.addEvent({
       delay: 1000,
